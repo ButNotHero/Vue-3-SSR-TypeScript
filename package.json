@@ -1,0 +1,81 @@
+{
+  "name": "default-typescript-template",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "fix": "yarn fix:eslint && yarn fix:prettier && yarn fix:stylelint",
+    "fix:eslint": "eslint **/*.{js,ts,vue} --fix",
+    "fix:prettier": "prettier --write **/*.{vue,js,ts,css,sass,scss}",
+    "fix:stylelint": "stylelint --fix **/*.{vue,css,sass,scss} --ignore-path",
+    "lint": "yarn lint:eslint && yarn lint:prettier && yarn lint:stylelint",
+    "lint:eslint": "eslint **/*.{js,ts,vue}",
+    "lint:prettier": "prettier --check **/*.{vue,js,ts,css,sass,scss}",
+    "lint:stylelint": "stylelint **/*.{vue,css,sass,scss} --ignore-path"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "vue": "^3.0.0",
+    "vue-i18n": "^9.1.7",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@intlify/vue-i18n-loader": "^2.1.2",
+    "@types/jest": "^24.0.19",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-e2e-cypress": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/test-utils": "^2.0.0-0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^7.0.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.0",
+    "node-sass": "^4.12.0",
+    "prettier": "^2.3.1",
+    "sass-loader": "^8.0.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-prettier": "^1.2.0",
+    "stylelint-scss": "^3.19.0",
+    "stylelint-webpack-plugin": "^2.1.1",
+    "typescript": "~4.1.5",
+    "vue-jest": "^5.0.0-0"
+  },
+  "gitHooks": {
+    "commit-msg": "commitlint -e -V",
+    "pre-commit": "lint-staged",
+    "pre-push": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{vue,js,ts}": "eslint --fix",
+    "*.{vue,js,ts,css,sass,scss}": "prettier --write",
+    "*.{vue,css,sass,scss}": "stylelint --fix"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged",
+      "pre-push": "lint-staged"
+    }
+  }
+}
