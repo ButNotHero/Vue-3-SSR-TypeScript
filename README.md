@@ -1,5 +1,7 @@
 # default-typescript-template
 
+To select a version with SSR, switch to the ssr branch. In the main branch, the version without SSR.
+
 ## Project setup
 ```
 yarn install
