@@ -1,11 +1,17 @@
 import { Module, ModuleTree } from 'vuex';
 import { IRootState } from '@/store/interfaces';
-import { state } from './state';
 import { getters } from './getters';
-import { mutations } from './mutations';
 import { actions } from './actions';
+import { mutations } from './mutations';
+import { state } from './state';
+import counterModule from '../counter';
+import counter1Module from '../counter1';
 
-const modules: ModuleTree<IRootState> = {};
+// Modules
+const modules: ModuleTree<IRootState> = {
+  counterModule,
+  counter1Module,
+};
 
 const root: Module<IRootState, IRootState> = {
   state,

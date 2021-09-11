@@ -1,14 +1,7 @@
-/* eslint-disable */
-import { ComponentCustomProperties } from 'vue';
-import { Store } from 'vuex';
+import { IRootState } from './store/interfaces';
 
 declare module '@vue/runtime-core' {
-  // Declare your own store states.
-  interface State {
-    count: number;
-  }
-
   interface ComponentCustomProperties {
-    $store: Store<State>;
+    $store: Store<IRootState>;
   }
 }

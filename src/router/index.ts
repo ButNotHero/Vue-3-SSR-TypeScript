@@ -1,8 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router';
+import { isSSR } from '@/shared/misc';
 import routes from '@/router/routes';
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: isSSR ? createMemoryHistory() : createWebHistory(),
   routes,
 });
 
