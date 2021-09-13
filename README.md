@@ -12,9 +12,33 @@ yarn install
 yarn serve
 ```
 
+### Compiles and minifies client and server side for production and run server (SSR)
+```
+yarn start
+```
+
+### Run server (SSR)
+```
+yarn start:server
+```
+
 ### Compiles and minifies for production
 ```
 yarn build
+```
+### Compiles and minifies client side for production (SSR)
+```
+yarn build:client
+```
+
+### Compiles and minifies server side for production (SSR)
+```
+yarn build:server
+```
+
+### Compiles and minifies client and server side for production (SSR)
+```
+yarn build:ssr
 ```
 
 ### Lints files

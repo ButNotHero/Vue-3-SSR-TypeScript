@@ -25,7 +25,7 @@ module.exports = {
     'guard-for-in': 'warn',
     'no-unused-expressions': 'warn',
     'import/extensions': 'warn',
-    'no-param-reassign': 'warn',
+    'no-param-reassign': 'off',
     'no-shadow': 'warn',
     'no-return-assign': 'warn',
     'no-restricted-syntax': 'warn',
@@ -35,6 +35,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     'no-underscore-dangle': 'off',
     '@typescript-eslint/no-empty-function': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/no-dynamic-require': 'off',
   },
   overrides: [
     {

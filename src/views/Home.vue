@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <h1>Home Page</h1>
+    <h1>{{ $t('home') }}</h1>
+    <HelloWorld />
     <ul v-if="users.length > 0">
       <li v-for="user in users" :key="user.id">{{ user.name }}</li>
     </ul>
@@ -10,22 +11,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import {
+  defineComponent, onMounted, onServerPrefetch, ref,
+} from 'vue';
 import { getUsers } from '@/services/users.service';
 import { User } from '@/types/user.d';
+import HelloWorld from '@/components/HelloWorld.vue';
 
 export default defineComponent({
   name: 'Home',
+  components: {
+    HelloWorld,
+  },
   setup() {
     const users = ref<User[]>([]);
 
-    onMounted(async () => {
-      users.value = await getUsers();
-    });
-
     const addNewUser = () => {
       users.value.push({
-        id: 1,
+        id: Math.random(),
         name: `Leanne Graham - ${Math.random()}`,
         username: 'Bret',
         email: 'Sincere@april.biz',
@@ -45,6 +48,14 @@ export default defineComponent({
         },
       });
     };
+
+    onServerPrefetch(async () => {
+      users.value = await getUsers();
+    });
+
+    onMounted(async () => {
+      users.value = await getUsers();
+    });
 
     return {
       users,

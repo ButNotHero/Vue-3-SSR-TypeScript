@@ -4,7 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "start": "yarn run build:ssr && yarn run start:server",
+    "start:server": "cross-env NODE_ENV=production node src/server",
     "build": "vue-cli-service build",
+    "build:client": "vue-cli-service build --dest dist/client",
+    "build:server": "cross-env VUE_APP_SSR=true vue-cli-service build --dest dist/server",
+    "build:ssr": "rimraf  ./dist && yarn run build:client && yarn run build:server",
     "fix": "yarn fix:eslint && yarn fix:prettier && yarn fix:stylelint",
     "fix:eslint": "eslint **/*.{js,ts,vue} --fix",
     "fix:prettier": "prettier --write **/*.{vue,js,ts,css,sass,scss}",
@@ -15,6 +20,8 @@
     "lint:stylelint": "stylelint **/*.{vue,css,sass,scss} --ignore-path"
   },
   "dependencies": {
+    "@vue/server-renderer": "^3.2.8",
+    "register-service-worker": "^1.7.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
@@ -41,6 +48,7 @@
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-0",
+    "cross-env": "^7.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^7.0.0",
@@ -59,7 +67,11 @@
     "stylelint-scss": "^3.19.0",
     "stylelint-webpack-plugin": "^2.1.1",
     "typescript": "~4.1.5",
-    "vue-jest": "^5.0.0-0"
+    "express": "^4.17.1",
+    "rimraf": "^3.0.2",
+    "vue-jest": "^5.0.0-0",
+    "webpack-manifest-plugin": "^2.2.0",
+    "webpack-node-externals": "^2.5.1"
   },
   "gitHooks": {
     "commit-msg": "commitlint -e -V",
