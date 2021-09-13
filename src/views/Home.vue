@@ -26,14 +26,6 @@ export default defineComponent({
   setup() {
     const users = ref<User[]>([]);
 
-    onServerPrefetch(async () => {
-      users.value = await getUsers();
-    });
-
-    onMounted(async () => {
-      users.value = await getUsers();
-    });
-
     const addNewUser = () => {
       users.value.push({
         id: Math.random(),
@@ -56,6 +48,14 @@ export default defineComponent({
         },
       });
     };
+
+    onServerPrefetch(async () => {
+      users.value = await getUsers();
+    });
+
+    onMounted(async () => {
+      users.value = await getUsers();
+    });
 
     return {
       users,
