@@ -1,7 +1,6 @@
 {
-  "name": "default-typescript-template",
+  "name": "vue3-ssr-typescript",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "start": "yarn run build:ssr && yarn run start:server",

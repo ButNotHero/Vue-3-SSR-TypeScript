@@ -1,10 +1,11 @@
-# default-typescript-template
+# Vue 3 SSR TypeScript
 
 ### TODO:
 1) Metadata
 2) SSR detect selected locale 
 3) ...and more !!!
 
+Contact me: butnothero@gmail.com
 
 ## Project setup
 ```
