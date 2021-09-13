@@ -1,6 +1,6 @@
 # default-typescript-template
 
-###TODO:
+### TODO:
 1) Metadata
 2) SSR detect selected locale 
 3) ...and more !!!
