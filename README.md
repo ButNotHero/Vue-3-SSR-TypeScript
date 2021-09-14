@@ -1,5 +1,7 @@
 # Vue 3 SSR TypeScript
 
+Requires Node JS version 14.x.x
+
 ### TODO:
 1) Metadata
 2) SSR detect selected locale 
