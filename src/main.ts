@@ -1,4 +1,7 @@
 import { createApp, createSSRApp, h } from 'vue';
+import { Router } from 'vue-router';
+import { Store } from 'vuex';
+import { IRootState } from '@/store/interfaces';
 import App from './App.vue';
 import router from './router';
 import { store } from './store';
@@ -6,7 +9,8 @@ import i18n from '@/plugins/i18n/vue-i18n';
 
 import './assets/scss/styles.scss';
 
-export default function (): any {
+// eslint-disable-next-line
+export default function (): { app: any; router: Router; store: Store<IRootState> } {
   const isSSR = typeof window === 'undefined';
 
   const rootComponent = {

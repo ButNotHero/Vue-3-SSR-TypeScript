@@ -4,6 +4,4 @@ import { Store } from '@/store';
 /**
  * Returns Whole Store Object
  */
-export function useStore(): Store {
-  return VuexStore() as Store;
-}
+export const useStore = (): Store => VuexStore() as Store;

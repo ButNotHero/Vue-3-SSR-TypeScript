@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-const setupInterceptors = (axiosInstance: AxiosInstance): any => {
+const setupInterceptors = (axiosInstance: AxiosInstance): AxiosResponse | void => {
   axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => config,
     (error) => {
