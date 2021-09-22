@@ -1,3 +1,5 @@
+// How to use: https://dev.to/thomasfindlay/how-to-easily-sync-with-multiple-v-models-in-vue-3-using-composition-api-1pmg
+
 import { computed, getCurrentInstance, WritableComputedRef } from 'vue';
 
 export const useVModel = (props: never, propName: string): WritableComputedRef<string> => {

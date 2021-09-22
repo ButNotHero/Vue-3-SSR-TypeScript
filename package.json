@@ -1,6 +1,6 @@
 {
   "name": "vue3-ssr-typescript",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "scripts": {
     "serve": "vue-cli-service serve",
     "start": "yarn run build:ssr && yarn run start:server",
@@ -23,6 +23,7 @@
     "register-service-worker": "^1.7.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "mitt": "^3.0.0",
     "vue": "^3.0.0",
     "vue-i18n": "^9.1.7",
     "vue-router": "^4.0.0-0",
