@@ -1,19 +1,25 @@
+import { reactive, readonly } from 'vue';
 import { createStore } from 'vuex';
-import { IRootState } from '@/store/interfaces';
-import { CounterStoreModuleTypes } from './modules/counter/types';
-import { Counter1StoreModuleTypes } from './modules/counter1/types';
-import { RootStoreModuleTypes } from './modules/root/types';
+import { isSSR } from '@/helpers';
+import { rootState } from '@/store/modules/root';
+import { DynamicObject } from '@/interfaces';
 
-import root from './modules/root';
+export abstract class Store<T extends DynamicObject> {
+  protected state: T;
 
-export const store = createStore<IRootState>(root);
+  constructor() {
+    const data = isSSR() ? this.data() : this.hydrate((window as DynamicObject).__STATE__ || {});
 
-type StoreModules = {
-  counterModule: CounterStoreModuleTypes;
-  counterModule1: Counter1StoreModuleTypes;
-  root: RootStoreModuleTypes;
-};
+    this.state = reactive(data) as T;
+  }
 
-export type Store = CounterStoreModuleTypes<Pick<StoreModules, 'counterModule'>> &
-  Counter1StoreModuleTypes<Pick<StoreModules, 'counterModule1'>> &
-  RootStoreModuleTypes<Pick<StoreModules, 'root'>>;
+  protected abstract hydrate(state: DynamicObject): T;
+
+  protected abstract data(): T;
+
+  public getState(): T {
+    return readonly(this.state) as T;
+  }
+}
+
+export const store = createStore(rootState);

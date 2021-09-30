@@ -10,6 +10,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    '@typescript-eslint/no-var-requires': 'off',
     'class-methods-use-this': 0,
     semi: 'off',
     '@typescript-eslint/semi': ['error'],
@@ -17,7 +18,6 @@ module.exports = {
     camelcase: 'warn',
     'vue/no-unused-components': 'warn',
     ' @typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
     'max-len': 'off',
     'global-require': 'off',
     'no-return-await': 'off',
@@ -37,6 +37,8 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-dynamic-require': 'off',
+    'no-void': 'warn',
+    'object-curly-newline': 'warn',
   },
   overrides: [
     {

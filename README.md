@@ -2,10 +2,17 @@
 
 Requires Node JS version 14.x.x
 
+## Features
+1) Vue 3
+2) Vuex
+3) Router
+4) SSR (meta, title)
+5) Multi language
+6) Light and dark mode (auto detect system dark mode)
+
 ### TODO:
-1) Metadata
-2) SSR detect selected locale 
-3) ...and more !!!
+1) Auto detect system language
+2) ...and more :)
 
 Contact me: butnothero@gmail.com
 

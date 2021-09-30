@@ -5,6 +5,7 @@ dist
 coverage
 build
 node_modules
+core
 
 # Ignore all HTML files:
 *.html

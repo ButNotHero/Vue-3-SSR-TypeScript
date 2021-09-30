@@ -1,0 +1,9 @@
+:root {
+  --body: #fff;
+  --text: #2c2c2c;
+}
+
+:root.dark-theme {
+  --body: #2d2d2d;
+  --text: #efefef;
+}

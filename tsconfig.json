@@ -1,20 +1,29 @@
 {
   "compilerOptions": {
+    "target": "es6",
     "noImplicitAny": false,
-    "target": "esnext",
-    "module": "esnext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "rootDir": "./",
+    "outDir": "build",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types"
+    ],
     "types": [
       "webpack-env",
-      "jest"
+      "node"
     ],
     "paths": {
       "@/*": [
@@ -26,7 +35,7 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
   },
   "include": [
     "src/**/*.ts",

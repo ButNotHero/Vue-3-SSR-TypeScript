@@ -1,140 +1,51 @@
-const webpack = require('webpack');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const nodeExternals = require('webpack-node-externals');
-const path = require('path');
 
 module.exports = {
   css: {
     loaderOptions: {
       sass: {
         prependData: `
-          @import "@/assets/scss/_vars";
-          @import "@/assets/scss/_mixins";
+          @import "@/assets/scss/_vars/index.scss";
+          @import "@/assets/scss/_mixins/index.scss";
         `,
       },
     },
   },
 
-  configureWebpack: {
-    plugins: [
-      new webpack.DefinePlugin({
-        __VUE_I18N_FULL_INSTALL__: true,
-        __VUE_I18N_LEGACY_API__: true,
-        __VUE_I18N_PROD_DEVTOOLS__: true,
-        __INTLIFY_PROD_DEVTOOLS__: false,
-      }),
-    ],
+  outputDir: './dist/client',
+  publicPath: '/',
+  runtimeCompiler: true,
+  devServer: {
+    host: 'localhost',
+    https: false,
+    port: 8080,
+    writeToDisk: true,
   },
+  chainWebpack: (config) => {
+    config.entryPoints.delete('app');
 
-  // !!! NOT SUPPORTED IN PRODUCTION MODE !!!
-  // devServer: {
-  //   proxy: {
-  //     '/api': {
-  //       target: process.env.BASE_URL,
-  //       pathRewrite: {
-  //         '^/api': '',
-  //       },
-  //     },
-  //   },
-  // },
-
-  chainWebpack: (webpackConfig) => {
-    if (!process.env.VUE_APP_SSR) {
-      webpackConfig.resolve.alias.set(
-        'vue3-component-library/components',
-        path.resolve(__dirname, 'node_modules/vue3-component-library/dist/esm'),
-      );
-    } else {
-      webpackConfig.resolve.alias.set(
-        'vue3-component-library/components',
-        path.resolve(__dirname, 'node_modules/vue3-component-library/dist/cjs'),
-      );
-    }
-    if (!process.env.VUE_APP_SSR) {
-      // This is required for repl.it to play nicely with the Dev Server
-      webpackConfig.devServer.disableHostCheck(true);
-      webpackConfig.entry('app').clear().add('./src/entry-client.ts');
+    if (!process.env.SSR) {
+      config.entry('client').add('./src/entry.client.ts');
       return;
     }
+    config.entry('server').add('./src/entry.server.ts');
 
-    webpackConfig.entry('app').clear().add('./src/entry-server.ts');
+    config.target('node');
+    config.output.libraryTarget('commonjs2');
 
-    webpackConfig.target('node');
-    webpackConfig.output.libraryTarget('commonjs2');
+    config.externals(nodeExternals({ allowlist: /\.(css|vue)$/ }));
 
-    webpackConfig.plugin('manifest').use(new ManifestPlugin({ fileName: 'ssr-manifest.json' }));
+    config.plugin('manifest').use(new WebpackManifestPlugin({ fileName: 'ssr-manifest.json' }));
 
-    webpackConfig.externals(
-      nodeExternals({
-        allowlist: [/\.(css|vue)$/, 'vue3-component-library/components/testworld'],
-      }),
-    );
+    config.optimization.splitChunks(false).minimize(false);
 
-    webpackConfig.optimization.splitChunks(false).minimize(false);
-
-    webpackConfig.plugins.delete('hmr');
-    webpackConfig.plugins.delete('preload');
-    webpackConfig.plugins.delete('prefetch');
-    webpackConfig.plugins.delete('progress');
-    webpackConfig.plugins.delete('friendly-errors');
-    webpackConfig.plugin('limit').use(
-      new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 1,
-      }),
-    );
+    config.plugins.delete('hmr');
+    config.plugins.delete('html');
+    config.plugins.delete('preload');
+    config.plugins.delete('prefetch');
+    config.plugins.delete('progress');
+    config.plugins.delete('friendly-errors');
+    config.plugins.delete('mini-css-extract-plugin');
   },
 };
-
-// exports.chainWebpack = (webpackConfig) => {
-//   if (!process.env.VUE_APP_SSR) {
-//     webpackConfig.resolve.alias.set(
-//       'vue3-component-library/components',
-//       path.resolve(__dirname, 'node_modules/vue3-component-library/dist/esm'),
-//     );
-//   } else {
-//     webpackConfig.resolve.alias.set(
-//       'vue3-component-library/components',
-//       path.resolve(__dirname, 'node_modules/vue3-component-library/dist/cjs'),
-//     );
-//   }
-//   if (!process.env.VUE_APP_SSR) {
-//     // This is required for repl.it to play nicely with the Dev Server
-//     webpackConfig.devServer.disableHostCheck(true);
-//     webpackConfig
-//       .entry('app')
-//       .clear()
-//       .add('./src/entry-client.ts');
-//     return;
-//   }
-//
-//   webpackConfig
-//     .entry('app')
-//     .clear()
-//     .add('./src/entry-server.ts');
-//
-//   webpackConfig.target('node');
-//   webpackConfig.output.libraryTarget('commonjs2');
-//
-//   webpackConfig
-//     .plugin('manifest')
-//     .use(new ManifestPlugin({ fileName: 'ssr-manifest.json' }));
-//
-//   webpackConfig.externals(
-//     nodeExternals({
-//       allowlist: [/\.(css|vue)$/, 'vue3-component-library/components/testworld'],
-//     }),
-//   );
-//
-//   webpackConfig.optimization.splitChunks(false).minimize(false);
-//
-//   webpackConfig.plugins.delete('hmr');
-//   webpackConfig.plugins.delete('preload');
-//   webpackConfig.plugins.delete('prefetch');
-//   webpackConfig.plugins.delete('progress');
-//   webpackConfig.plugins.delete('friendly-errors');
-//   webpackConfig.plugin('limit').use(
-//     new webpack.optimize.LimitChunkCountPlugin({
-//       maxChunks: 1,
-//     }),
-//   );
-// };
