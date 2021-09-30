@@ -26,33 +26,29 @@ yarn install
 yarn serve
 ```
 
-### Compiles and minifies client and server side for production and run server (SSR)
+### Compiles and minifies client and server side for production and start SSR server (production)
 ```
 yarn start
 ```
 
-### Run server (SSR)
+### Compiles and minifies client and server side for production
 ```
-yarn start:server
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-### Compiles and minifies client side for production (SSR)
-```
-yarn build:client
+yarn bundle:production
 ```
 
-### Compiles and minifies server side for production (SSR)
+### Run SSR server (development mode)
 ```
-yarn build:server
+yarn serve:ssr
 ```
 
-### Compiles and minifies client and server side for production (SSR)
+### Refresh server build and client build (development mode)
 ```
-yarn build:ssr
+yarn serve:refresh
+```
+
+### Clean build directory
+```
+yarn clean
 ```
 
 ### Lints files

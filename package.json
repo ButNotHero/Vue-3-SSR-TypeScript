@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
+    "start": "yarn run bundle:production && yarn run serve:production",
     "clean": "rimraf ./dist",
     "bundle": "yarn run clean && yarn run bundle:client && yarn run bundle:server",
     "bundle:client": "vue-cli-service build",
@@ -11,6 +12,7 @@
     "bundle:production": "yarn run bundle:app && yarn run bundle:client && yarn run bundle:server",
     "serve": "vue-cli-service serve",
     "serve:ssr": "cross-env NODE_ENV=development nodemon --ignore dist/ -e ejs,js,ts,css,html,jpg,png,scss app.ts",
+    "serve:production": "cross-env NODE_ENV=production nodemon --ignore dist/ -e ejs,js,ts,css,html,jpg,png,scss app.ts",
     "serve:refresh": "yarn run bundle && yarn run serve:ssr",
     "fix": "yarn fix:eslint && yarn fix:prettier && yarn fix:stylelint",
     "fix:eslint": "eslint **/*.{js,ts,vue} --fix",
