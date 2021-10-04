@@ -13,7 +13,6 @@ import { computed, defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import i18n from '@/plugins/i18n/vue-i18n';
 import { LS_LOCALE } from '../../../env.common';
-import { useSSR } from '@/use/useSSR';
 
 export default defineComponent({
   name: 'ChangeLocale',
@@ -32,21 +31,9 @@ export default defineComponent({
 
     const updateLocale = (locale: string) => {
       const _locale = locale.toLowerCase();
-      window.location.href = `/${_locale}${route.fullPath.slice(3)}`;
       localStorage.setItem(LS_LOCALE, _locale);
+      window.location.href = `/${_locale}${route.fullPath.slice(3)}`;
     };
-
-    const initAppLocale = () => {
-      i18n.global.locale = String(route.params.locale);
-      // TODO: Make it work for SSR
-      // if (typeof window !== 'undefined') {
-      //   i18n.global.locale = localStorage.getItem(LS_LOCALE) || 'ru';
-      // }
-    };
-
-    useSSR(() => {
-      initAppLocale();
-    });
 
     return {
       getLocales,

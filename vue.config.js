@@ -17,7 +17,6 @@ module.exports = {
   publicPath: '/',
   runtimeCompiler: true,
   devServer: {
-    host: 'localhost',
     https: false,
     port: 8080,
     writeToDisk: true,

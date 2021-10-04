@@ -1,6 +1,7 @@
 <template>
   <section class="home-page">
     <h1>!!! {{ title }} {{ $t('home') }} !!!</h1>
+    <router-link :to="{ name: 'about' }">Go to about page</router-link>
     <ul>
       <li>Name: {{ userData.name }}</li>
       <li>Username: {{ userData.username }}</li>
@@ -62,6 +63,10 @@ export default defineComponent({
 <style scoped lang="scss">
 .home-page {
   padding: 20px;
+
+  a {
+    color: $color-text;
+  }
 
   h1 {
     color: $color-text;
